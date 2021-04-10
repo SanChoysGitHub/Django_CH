@@ -27,10 +27,11 @@ def view_news(request, news_id):
 
 def add_news(request):
     if request.method == 'POST':  # Проверка метода
-        form = NewsForm(request.POST)
+        form = NewsForm(request.POST)  # Заполнение данными которые пришли в форму
         if form.is_valid():  # Прошло ли значение валидацию
-            print(form.cleaned_data)
-            news = News.objects.create(**form.cleaned_data)  # Сохранение данных
+            # print(form.cleaned_data)
+            # news = News.objects.create(**form.cleaned_data)  # Сохранение очищенных данных
+            news = form.save()  # Сохранение данных
             return redirect(news)
     else:
         form = NewsForm()
